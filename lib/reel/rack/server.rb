@@ -20,7 +20,7 @@ module Reel
         super(options[:Host], options[:Port], &method(:on_connection))
         @app = app
       end
-   
+
       def on_connection(connection)
         connection.each_request do |request|
           if request.websocket?
@@ -30,7 +30,7 @@ module Reel
           end
         end
       end
-   
+
       # Compile the regex once
       CONTENT_LENGTH_HEADER = %r{^content-length$}i
 
@@ -101,7 +101,7 @@ module Reel
       end
 
       def status_symbol(status)
-        if status.is_a?(Fixnum)
+        if status.is_a?(Integer)
           Reel::Response::STATUS_CODES[status].downcase.gsub(/\s|-/, '_').to_sym
         else
           status.to_sym
